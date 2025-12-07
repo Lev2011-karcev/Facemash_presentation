@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Технологическая карта — Facemash 8-класс</title>
+    <style>
+        :root {
+            --bg-main: #050712;
+            --bg-card: rgba(10, 12, 25, 0.96);
+            --accent: #ff007a;
+            --accent-soft: rgba(255, 0, 122, 0.2);
+            --accent-2: #00e0ff;
+            --text-main: #f5f5f5;
+            --text-muted: #8b8fa3;
+            --border-radius-lg: 18px;
+            --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.65);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at top, #1a1f3a 0, #050712 55%, #020308 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .page-wrap {
+            width: 100%;
+            max-width: 1100px;
+            padding: 24px 20px;
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .logo-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ffecf7 0, #ff4b9a 40%, #5d1cff 100%);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .logo-text-main {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .logo-text-main span:last-child { color: var(--accent); }
+
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #ff4b9a, #ffcf4b, #00e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 10% 0, rgba(255, 0, 122, 0.26), transparent 55%),
+                radial-gradient(circle at 110% 110%, rgba(0, 224, 255, 0.14), transparent 55%);
+            mix-blend-mode: soft-light;
+            opacity: 0.7;
+        }
+
+        .card > * { position: relative; z-index: 1; }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--accent-2);
+            letter-spacing: 0.05em;
+        }
+
+        .authors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .author {
+            background: rgba(15, 18, 35, 0.9);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .author img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .author-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .author-role {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .author-class { color: var(--text-muted); font-size: 14px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+
+        th {
+            background: rgba(255, 0, 122, 0.1);
+            padding: 12px 10px;
+            text-align: left;
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+        .stack-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stack-item {
+            background: rgba(10, 12, 25, 0.95);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(120deg, #ff007a, #ff4b9a);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            box-shadow: 0 12px 26px rgba(255, 0, 122, 0.5);
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(255, 0, 122, 0.7);
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+    <div class="logo-block">
+        <div class="logo-circle"></div>
+        <div class="logo-text-main">
+            <span>FACE</span><span>MASH</span>
+        </div>
+    </div>
+
+    <h1 class="page-title">Технологическая карта проекта</h1>
+    <p class="page-subtitle">Facemash 8-класс • 2025</p>
+
+    <!-- Авторы -->
+    <div class="card">
+        <h2>Авторы проекта</h2>
+        <div class="authors">
+            <div class="author">
+                <img src="Я.jpg" alt="Карцев Лев"> <!-- Замени на своё фото -->
+                <div class="author-name">Карцев Лев</div>
+                <div class="author-role">Backend-разработчик • Архитектор</div>
+                <div class="author-class">8 «В» класс</div>
+            </div>
+            <div class="author">
+                <img src="Егор.jpg" alt="Егор Василенко"> <!-- Замени на своё фото -->
+                <div class="author-name">Егор Василенко</div>
+                <div class="author-role">Frontend-разработчик • Дизайнер</div>
+                <div class="author-class">8 «В» класс</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Стек -->
+    <div class="card">
+        <h2>Технологический стек</h2>
+        <div class="stack-list">
+            <div class="stack-item">Java 23</div>
+            <div class="stack-item">Spring Boot 3.x</div>
+            <div class="stack-item">Gradle (Groovy)</div>
+            <div class="stack-item">Lombok</div>
+            <div class="stack-item">PostgreSQL</div>
+            <div class="stack-item">Spring Data JPA + Hibernate</div>
+            <div class="stack-item">Spring Web (@RestController)</div>
+            <div class="stack-item">BYTEA → base64 на бэкенде</div>
+        </div>
+    </div>
+
+    <!-- API -->
+    <div class="card">
+        <h2>REST API</h2>
+        <table>
+            <tr>
+                <th>Метод</th>
+                <th>URL</th>
+                <th>Параметры</th>
+                <th>Описание</th>
+                <th>Ответ</th>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/pair</td>
+                <td>?id_win=5 (опционально)</td>
+                <td>Возвращает случайную пару (исключает id_win)</td>
+                <td>JSON: массив из 2 объектов Person (с base64Photo)</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/pair</td>
+                <td>—</td>
+                <td>Любая случайная пара</td>
+                <td>JSON: массив из 2 объектов</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/NewElo</td>
+                <td>winnerId, loserId (form-data)</td>
+                <td>Пересчитывает ELO после голосования</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/top</td>
+                <td>—</td>
+                <td>Топ всех участников</td>
+                <td>JSON: массив всех Person, отсортированных по ELO DESC</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- База данных -->
+    <div class="card">
+        <h2>Схема базы данных</h2>
+        <pre style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; overflow-x:auto; font-size:14px;">
+CREATE TABLE person (
+    id      BIGSERIAL PRIMARY KEY,
+    name    TEXT NOT NULL,
+    elo     INTEGER DEFAULT 1500 NOT NULL,
+    photo   BYTEA                    -- фото хранятся как байты
+);</pre>
+        <p style="margin-top:12px; color:var(--text-muted);">
+            При отдаче фото сразу конвертируются в base64 на бэкенде (поле <code>base64Photo</code> в JSON)
+        </p>
+    </div>
+
+    <!-- Запуск -->
+    <div class="card">
+        <h2>Как запустить</h2>
+        <p style="font-family: monospace; background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; display:inline-block;">
+            ./gradlew bootRun
+        </p>
+        <p style="margin-top:12px;">
+            Туннель: <code>lt --port 8080 --subdomain facemash11</code><br>
+            → <a href="https://facemash11.loca.lt" style="color:var(--accent-2);">https://facemash11.loca.lt</a>
+        </p>
+    </div>
+
+    <!-- Ссылки -->
+    <div class="links">
+        <a href="https://github.com/Lev2011-karcev/facemash" class="btn" target="_blank">GitHub репозиторий</a>
+        <a href="index.html" class="btn">Вернуться на Facemash</a>
+    </div>
+
+    <div class="footer">
+        © 2025 Карцев Лев & Егор Василенко • 8 «В» класс • Проект по информатике
+    </div>
+</div>
+
+</body>
+</html>
